@@ -1,126 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darts Finishing</title>
-    
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Finish IT - Dart Outshot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #141E30, #243B55);
-            color: white;
-            text-align: center;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #f3f5f7;
             margin: 0;
             padding: 0;
+            text-align: center;
+            color: #333;
         }
-
         h1 {
-            font-size: 2.5rem;
+            font-size: 1.6rem;
             margin-top: 20px;
         }
-
+        h2 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        #input-section {
+            margin: 30px 0;
+        }
+        #input-score {
+            font-size: 4rem;
+            font-weight: 600;
+            margin: 0;
+        }
         form {
             margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
         }
-
         input[type="number"] {
             padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            width: 150px;
+            font-size: 1.2rem;
+            width: 100px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
         }
-
         button {
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 1rem;
+            border-radius: 8px;
+            background-color: #4CAF50;
             color: white;
-            background-color: #ff6600;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
         }
-
-        button:hover {
-            background-color: #e65c00;
-        }
-
-        h2 {
-            margin-top: 20px;
-            font-size: 2rem;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            margin: 5px auto;
-            width: 200px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-
-        p {
-            margin-top: 10px;
+        .grid-title {
+            font-weight: 600;
             font-size: 1.2rem;
-        }
-
-        /* Bild-Styling */
-        .image-container {
             margin-top: 30px;
         }
-
-        .image-container img {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 20px;
+            gap: 12px;
         }
-
-        .image-caption {
-            margin-top: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .vertical-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 20px;
+            gap: 8px;
+        }
+        .vertical-list .combo {
+            width: 200px;
+            text-align: center;
+        }
+        .suggested-ways-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin: 20px;
+        }
+        .score-badge {
+            min-width: 90px;
+            height: 90px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #2e7d32;
+            border-radius: 12px;
+            background-color: #ffffff;
+            color: #2e7d32;
+            font-size: 2.2rem;
+            font-weight: 700;
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+        }
+        .score-display {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #333;
+            min-width: 120px;
+        }
+        .combo {
+            padding: 10px 16px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            border: 1px solid #aaa;
+            font-size: 1rem;
+            min-width: 70px;
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: 1px solid #1b5e20;
+            font-weight: 600;
+        }
+        .throw-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .throw-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 44px;
+            padding: 0 8px;
+            border: 2px solid #2e7d32;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #2e7d32;
+            font-weight: 600;
+            box-sizing: border-box;
+        }
+        .highlight .throw-box {
+            border-color: #ffffff;
+            color: #ffffff;
+            background-color: transparent;
+        }
+        #liveSection {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            display: none;
+        }
+        #liveSection.active {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <h1>Darts Finishing</h1>
+    <h1>Finish IT</h1>
+    <h2>Dart Outshot Calculator</h2>
     
-    <form method="POST">
-        <input type="number" name="input_value" id="input_value" required placeholder="Enter a number">
-        <button type="submit">Calculate</button>
-    </form>
-
-    {% if output_value is not none and output_value|length > 0 %}
-        <h2>Ways: {{ request.form['input_value'] }}</h2>
-        <ul>
-            {% for item in output_value %}
-                <li>{{ item }}</li>
-            {% endfor %}
-        </ul>
-        <p>Wege für: {{ request.form['input_value'] }}</p>
+    {% if suggested_ways is not none and suggested_ways|length > 0 %}
+        <div class="suggested-ways-container">
+            <div class="score-badge">{{ request.form.get('input_value', '---') }}</div>
+            <div>
+                <div class="grid-title">Suggested Ways</div>
+                <div class="vertical-list">
+                    {% for item in suggested_ways %}
+                        <div class="combo highlight">
+                            {% if item is sequence and item is not string %}
+                                <div class="throw-row">
+                                    {% for throw in item %}
+                                        <span class="throw-box">{{ throw }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ item }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if na_double_double_finishes is not none and na_double_double_finishes|length > 0 %}
+                <div>
+                    <div class="grid-title">NA Double Double Finishes</div>
+                    <div class="vertical-list">
+                        {% for item in na_double_double_finishes %}
+                            <div class="combo highlight">
+                                <div class="throw-row">
+                                    {% for throw in item %}
+                                        <span class="throw-box">{{ throw }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
     {% endif %}
 
-    {% if print_solution_message %}
-        <p>{{ print_solution_message }}</p>
+    {% if na_double_double_finishes is not none and na_double_double_finishes|length > 0 and suggested_ways is none %}
+      <div class="grid-title">NA Double Double Finishes</div>
+      <div class="vertical-list">
+        {% for item in na_double_double_finishes %}
+                    <div class="combo highlight">
+                        <div class="throw-row">
+                            {% for throw in item %}
+                                <span class="throw-box">{{ throw }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+        {% endfor %}
+      </div>
     {% endif %}
-
-    <div class="image-container">
-        
+    
+    <!-- Live OCR Section -->
+    <div id="liveSection">
+        <h3>Live Outshot (OCR)</h3>
+        <div>Score: <span id="liveScore">—</span></div>
+        <div id="liveMsg"></div>
+        <div id="liveWays"></div>
     </div>
-</body>
-</html>
+    
+    <div id="input-section">
+        <div id="input-score">{{ request.form.get('input_value', '---') }}</div>
+        <form method="POST">
+            <input type="number" name="input_value" id="input_value" required placeholder="Enter score">
+            <button type="submit">Calculate</button>
+        </form>
 
+        {% if print_solution_message %}
+            <div class="grid-title">{{ print_solution_message }}</div>
+        {% endif %}
+    </div>
+
+    {% if preferred_ways is not none and preferred_ways|length > 0 %}
+        <div class="grid-title">All Ways</div>
+        <div class="grid">
+            {% for item in output_value %}
+                <div class="combo highlight">
+                    <div class="throw-row">
+                        {% for throw in item %}
+                            <span class="throw-box">{{ throw }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script>
+    let lastSubmittedScore = null;
+
+    async function submitScore(score) {
+      try {
+        const formData = new FormData();
+        formData.append('input_value', score);
+        
+        const res = await fetch("/", {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (res.ok) {
+          const html = await res.text();
+          // Parse and update the page content
+          const parser = new DOMParser();
+          const newDoc = parser.parseFromString(html, 'text/html');
+          document.body.innerHTML = newDoc.body.innerHTML;
+          
+          // Restart the refresh loop
+          lastSubmittedScore = score;
+          refreshOutshot();
+        }
+      } catch (e) {
+        console.log("submitScore error", e);
+      }
+    }
+
+    async function refreshOutshot() {
+      try {
+        const res = await fetch("/api/outshot");
+        const data = await res.json();
+
+        // Show live section if we get data
+        const liveSection = document.getElementById("liveSection");
+        
+        if (data.ok) {
+          liveSection.classList.add("active");
+          document.getElementById("liveScore").textContent = data.score ?? "—";
+          document.getElementById("liveMsg").textContent = data.message ?? "";
+
+          // Auto-populate the input field with OCR score
+          const inputField = document.getElementById("input_value");
+          
+          // Only submit if it's a new score
+          if (data.score !== lastSubmittedScore && data.score !== null) {
+            inputField.value = data.score;
+            submitScore(data.score);
+            return; // Exit early, will be called again after page update
+          }
+
+          // Render suggested_ways (simple example)
+          const container = document.getElementById("liveWays");
+          container.innerHTML = "";
+
+          if (Array.isArray(data.suggested_ways) && data.suggested_ways.length > 0) {
+            const heading = document.createElement("div");
+            heading.style.fontWeight = "bold";
+            heading.textContent = "Ways:";
+            container.appendChild(heading);
+            
+            data.suggested_ways.forEach(row => {
+              const div = document.createElement("div");
+                            div.classList.add("throw-row");
+                            if (Array.isArray(row)) {
+                                row.forEach(throwLabel => {
+                                    const span = document.createElement("span");
+                                    span.classList.add("throw-box");
+                                    span.textContent = throwLabel;
+                                    div.appendChild(span);
+                                });
+                            } else {
+                                const span = document.createElement("span");
+                                span.classList.add("throw-box");
+                                span.textContent = row;
+                                div.appendChild(span);
+                            }
+              container.appendChild(div);
+            });
+          }
+        } else {
+          liveSection.classList.remove("active");
+        }
+      } catch (e) {
+        console.log("refreshOutshot error", e);
+      }
+    }
+
+    setInterval(refreshOutshot, 700);
+    refreshOutshot();
+    </script>
+</body> 
+</html>
